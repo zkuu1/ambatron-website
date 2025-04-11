@@ -1,43 +1,58 @@
+"use client";
+
 import { Socials } from "@/constants";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
   return (
-    <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md z-50 px-10">
-      <div className="w-full h-full flex flex-row items-center justify-between m-auto px-[10px]">
-        <a
-          href="#about-me"
-          className="h-auto w-auto flex flex-row items-center"
-        >
+    <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001417] backdrop-blur-md z-50 px-5 md:px-10">
+      <div className="w-full h-full flex items-center justify-between m-auto px-[10px]">
+        {/* Logo */}
+        <a href="#about-me" className="flex items-center">
           <Image
-            src="/NavLogo.png"
+            src="/boss/boss1.png"
             alt="logo"
-            width={70}
-            height={70}
+            width={50}
+            height={50}
             className="cursor-pointer hover:animate-slowspin"
           />
-
-          <span className="font-bold ml-[10px] hidden md:block text-gray-300">
+          <span className="font-bold ml-2 hidden md:block text-gray-300">
             Sotgan Api Dev
           </span>
         </a>
 
-        <div className="w-[500px] h-full flex flex-row items-center justify-between md:mr-20">
-          <div className="flex items-center justify-between w-full h-auto border border-[#7042f861] bg-[#0300145e] mr-[15px] px-[20px] py-[10px] rounded-full text-gray-200">
-            <a href="#about-me" className="cursor-pointer">
-              Home
-            </a>
-            <a href="#skills" className="cursor-pointer">
-              Skills
-            </a>
-            <a href="#plane" className="cursor-pointer">
-              gallery
-            </a>
-          </div>
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center justify-between border border-[#7042f861] bg-[#0300145e] px-5 py-2 rounded-full text-gray-200 space-x-5">
+          <a href="#about-me" className="cursor-pointer">
+            Home
+          </a>
+          <a href="#skills" className="cursor-pointer">
+            Skills
+          </a>
+          <a href="#plane" className="cursor-pointer">
+            Gallery
+          </a>
         </div>
 
-        <div className="flex flex-row gap-5">
+        {/* Hamburger Icon - Mobile */}
+        <div className="md:hidden">
+          <button onClick={toggleMenu}>
+            {menuOpen ? (
+              <X size={30} className="text-white" />
+            ) : (
+              <Menu size={30} className="text-white" />
+            )}
+          </button>
+        </div>
+
+        {/* Socials - Desktop Only */}
+        <div className="hidden md:flex flex-row gap-5">
           {Socials.map((social) => (
             <a
               href={social.link}
@@ -56,6 +71,41 @@ const Navbar = () => {
           ))}
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-[#030014e6] backdrop-blur-md px-5 py-4 space-y-4 text-gray-200 flex flex-col items-start">
+          <a href="#about-me" onClick={toggleMenu}>
+            Home
+          </a>
+          <a href="#skills" onClick={toggleMenu}>
+            Skills
+          </a>
+          <a href="#plane" onClick={toggleMenu}>
+            Gallery
+          </a>
+
+          {/* Socials - Mobile */}
+          <div className="flex gap-4 pt-2">
+            {Socials.map((social) => (
+              <a
+                href={social.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={social.name}
+              >
+                <Image
+                  className="hover:opacity-50"
+                  src={social.src}
+                  alt={social.name}
+                  width={24}
+                  height={24}
+                />
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
