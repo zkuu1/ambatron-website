@@ -4,6 +4,7 @@ import { Socials } from "@/constants";
 import Image from "next/image";
 import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -33,11 +34,14 @@ const Navbar = () => {
             Home
           </a>
           <a href="#skills" className="cursor-pointer">
-            Skills
-          </a>
-          <a href="#plane" className="cursor-pointer">
             Gallery
           </a>
+          <a href="#plane" className="cursor-pointer">
+            Other
+          </a>
+          <Button className="bg-purple-900 hover:bg-purple-500 text-white px-4 py-2 rounded-full">
+            <a href="/auth/login">Login</a>
+          </Button>
         </div>
 
         {/* Hamburger Icon - Mobile */}
@@ -83,6 +87,14 @@ const Navbar = () => {
           </a>
           <a href="#plane" onClick={toggleMenu}>
             Gallery
+          </a>
+
+          {/* Mobile Login Button */}
+          <a
+            href="/auth/login"
+            className="bg-purple-900 hover:bg-purple-500 text-white px-4 py-2 rounded-full text-center w-full block"
+          >
+            Login
           </a>
 
           {/* Socials - Mobile */}
