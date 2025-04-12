@@ -30,17 +30,17 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center justify-between border border-[#7042f861] bg-[#0300145e] px-5 py-2 rounded-full text-gray-200 space-x-5">
-          <a href="#about-me" className="cursor-pointer">
+          <a href="/#about-me" className="cursor-pointer">
             Home
           </a>
-          <a href="#skills" className="cursor-pointer">
+          <a href="/#skills" className="cursor-pointer">
             Gallery
           </a>
-          <a href="#plane" className="cursor-pointer">
+          <a href="/#plane" className="cursor-pointer">
             Other
           </a>
           <Button className="bg-purple-900 hover:bg-purple-500 text-white px-4 py-2 rounded-full">
-            <a href="/auth/login">Login</a>
+            <a href="/login">Login</a>
           </Button>
         </div>
 
@@ -79,19 +79,19 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-[#030014e6] backdrop-blur-md px-5 py-4 space-y-4 text-gray-200 flex flex-col items-start">
-          <a href="#about-me" onClick={toggleMenu}>
+          <a href="/#about-me" onClick={toggleMenu}>
             Home
           </a>
-          <a href="#skills" onClick={toggleMenu}>
+          <a href="/#skills" onClick={toggleMenu}>
             Skills
           </a>
-          <a href="#plane" onClick={toggleMenu}>
+          <a href="/#plane" onClick={toggleMenu}>
             Gallery
           </a>
 
           {/* Mobile Login Button */}
           <a
-            href="/auth/login"
+            href="/login"
             className="bg-purple-900 hover:bg-purple-500 text-white px-4 py-2 rounded-full text-center w-full block"
           >
             Login

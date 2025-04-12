@@ -4,16 +4,26 @@ import React from "react";
 import Navbar from "@/components/main/Navbar";
 import { Button } from "@/components/ui/button";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div className="min-h-screen w-full bg-[url('/bg-login.jpg')] bg-cover bg-center flex flex-col items-center">
       <Navbar />
       
       <div className="flex-grow flex justify-center items-center px-4">
-        <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg max-w-md w-full text-white border border-white/20">
-          <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+      <div className="bg-white/10 backdrop-blur-md p-8 rounded-2xl shadow-lg max-w-md w-full text-white border border-white/20 z-[20]">
+          <h2 className="text-2xl font-bold mb-6 text-center">Pre Regist</h2>
           
           <form className="space-y-4">
+            <div>
+              <label htmlFor="name" className="block mb-1">Name</label>
+              <input
+                id="name"
+                type="name"
+                placeholder="Enter your name"
+                className="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+
             <div>
               <label htmlFor="email" className="block mb-1">Email</label>
               <input
@@ -23,7 +33,7 @@ const LoginPage = () => {
                 className="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-gray-300 outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
-
+            
             <div>
               <label htmlFor="password" className="block mb-1">Password</label>
               <input
@@ -42,13 +52,10 @@ const LoginPage = () => {
             </Button>
           </form>
 
-          <p className="text-center text-sm text-gray-300 mt-4">
-            Don't have an account? <a href="/register" className="text-purple-400 underline">Register</a>
-          </p>
         </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

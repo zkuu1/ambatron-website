@@ -3,7 +3,7 @@ import Hero from "@/components/main/Hero";
 import Projects from "@/components/main/Projects";
 import Skills from "@/components/main/Skills";
 import Image from "next/image";
-import LoginPage from "./pages/page";
+import LoginPage from "./login/page";
 
 export default function Home() {
   return (
