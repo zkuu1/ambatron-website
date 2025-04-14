@@ -29,22 +29,34 @@ export default function DashboardPage() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
-        // Dummy data, replace with actual Firebase fetching
+       
         setScore(44872);
         setLeaderboard({ rank: 1, points: 44872 });
-        setSkins([
-          {
-            id: "blue_cosmos",
-            name: "Blue Cosmos",
-            description: "Skin default luar angkasa",
-            imageUrl: "/skins/blue_cosmos.png",
+        setSkins([ 
+          { 
+            id: "blue_cosmos", 
+            name: "Blue Cosmos", 
+            description: "Skin default luar angkasa", 
+            imageUrl: "/plane/classic_plane.png" 
+          }, 
+          { 
+            id: "retro_sky", 
+            name: "Retro Sky", 
+            description: "Gaya retro tahun 90an", 
+            imageUrl: "/plane/space_defender.png" 
           },
-          {
-            id: "retro_sky",
-            name: "Retro Sky",
-            description: "Gaya retro tahun 90an",
-            imageUrl: "/skins/retro_sky.png",
+          { 
+            id: "core X6", 
+            name: "Core X6", 
+            description: "Mesin Core Tenaga Generasi Ke 6", 
+            imageUrl: "/plane/core_x6.png" 
           },
+          { 
+            id: "nusei", 
+            name: "Nusei", 
+            description: "Gagah Seperti Phoenix", 
+            imageUrl: "/plane/nusei_15.png" 
+          } 
         ]);
       } else {
         router.push('/login');
@@ -57,11 +69,11 @@ export default function DashboardPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen  bg-[#0f0f0f] text-white p-6">
+    <div className="min-h-screen bg-[#0f0f0f] text-white flex items-center justify-center py-12">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-3xl font-bold">Welcome, {user.displayName || user.email}!</h1>
+          <h1 className="text-3xl font-bold">Welcome Back  {user.displayName || user.email}!</h1>
           <p className="text-sm text-gray-400">Here’s your game summary.</p>
         </div>
 
