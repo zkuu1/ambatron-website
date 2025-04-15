@@ -13,6 +13,13 @@ interface Skin {
   imageUrl: string;
 }
 
+interface Achievement {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string;
+}
+
 interface LeaderboardData {
   rank: number;
   points: number;
@@ -24,6 +31,8 @@ export default function DashboardPage() {
   const [skins, setSkins] = useState<Skin[]>([]);
   const [score, setScore] = useState<number>(0);
   const [leaderboard, setLeaderboard] = useState<LeaderboardData | null>(null);
+  const [monsterDefeated, setMonsterDefeated] = useState<number>(0);
+  const [achievement, setAchievement] = useState<Achievement[]>([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -32,6 +41,9 @@ export default function DashboardPage() {
        
         setScore(44872);
         setLeaderboard({ rank: 1, points: 44872 });
+        setMonsterDefeated(699);
+
+        // Set skins
         setSkins([ 
           { 
             id: "blue_cosmos", 
@@ -58,6 +70,22 @@ export default function DashboardPage() {
             imageUrl: "/plane/nusei_15.png" 
           } 
         ]);
+
+        // Set achievements
+        setAchievement([
+          {
+            id: "achievement_1",
+            name: "The Collector",
+            description: "Achieved Skin Over 20+",
+            imageUrl: "/achievement/collector.png"
+          },
+          {
+            id: "The Destroyer",
+            name: "The Destroyer",
+            description: "Defeated 10.000 monsters in total",
+            imageUrl: "/achievement/destroyer.png"
+          }
+        ])
       } else {
         router.push('/login');
       }
@@ -69,7 +97,7 @@ export default function DashboardPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-[#0f0f0f] text-white flex items-center justify-center py-12">
+    <div className="min-h-screen bg-[#0f0f0f] text-white flex items-center justify-center py-12  pt-24 md:pt-10 pb-12">
       <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
         <div className="text-center">
@@ -87,14 +115,21 @@ export default function DashboardPage() {
             <h2 className="text-2xl font-bold">{skins.length}</h2>
             <p className="text-sm text-gray-400">Total Skins</p>
           </div>
+
+          <div>
+            <h2 className="text-2xl font-bold">{monsterDefeated}</h2>
+            <p className="text-sm text-gray-400">Ambatron Defeated</p>
+          </div>
+          
           <div>
             <h2 className="text-2xl font-bold">#{leaderboard?.rank}</h2>
             <p className="text-sm text-gray-400">Leaderboard Rank</p>
           </div>
+
         </div>
 
         {/* Skins */}
-        <div className="bg-[#1c1c1c] p-6 rounded-2xl shadow-md">
+        <div className="bg-[#1c1c1c] p-6 rounded-2xl shadow-md ">
           <h3 className="text-xl font-semibold mb-4">Owned Skins</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {skins.map((skin) => (
@@ -112,9 +147,36 @@ export default function DashboardPage() {
                 </div>
               </div>
             ))}
+
           </div>
         </div>
+
+          {/* Achievement */}
+          <div className="bg-[#1c1c1c] p-6 rounded-2xl shadow-md ">
+          <h3 className="text-xl font-semibold mb-4">Achievement</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {achievement.map((achievement) => (
+              <div key={achievement.id} className="flex items-center gap-4 bg-[#2a2a2a] p-4 rounded-xl">
+                <Image
+                  src={achievement.imageUrl}
+                  alt={achievement.name}
+                  width={48}
+                  height={48}
+                  className="rounded-full object-cover"
+                />
+                <div>
+                  <h4 className="font-semibold">{achievement.name}</h4>
+                  <p className="text-sm text-gray-400">{achievement.description}</p>
+                </div>
+              </div>
+            ))}
+
+          </div>
+        </div>
+
+        
       </div>
     </div>
+    
   );
 }
